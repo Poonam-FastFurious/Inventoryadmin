@@ -1,0 +1,103 @@
+
+body {
+  font-family: "Nunito", sans-serif;
+}
+.sidebar-inner {
+  width: 100%;
+  scrollbar-width: thin;
+  scrollbar-color: #ccc transparent;
+}
+
+/* For WebKit-based browsers (like Chrome) */
+.sidebar-inner::-webkit-scrollbar {
+  width: 6px;
+}
+
+.sidebar-inner::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.sidebar-inner::-webkit-scrollbar-thumb {
+  background-color: #ccc;
+  border-radius: 4px;
+}
+
+
+
+/* In your CSS file (e.g., Aside.css) */
+
+.sidebar {
+  display: flex;
+  flex-direction: column;
+ 
+}
+
+.sidebar-inner {
+  flex-grow: 1;
+  overflow-y: auto;
+  width: 100%;
+  scrollbar-width: thin;
+  scrollbar-color: #ccc transparent;
+}
+
+.sidebar-inner::-webkit-scrollbar {
+  width: 6px;
+}
+
+.sidebar-inner::-webkit-scrollbar-thumb {
+  background: #ccc;
+  border-radius: 4px;
+}
+.submenu ul {
+  display: none;
+}
+
+.submenu.active > ul {
+  display: block;
+}
+
+.menu-arrow {
+  transition: transform 0.3s ease;
+}
+
+.submenu.active .menu-arrow {
+  transform: rotate(180deg);
+}
+
+
+
+
+.swal-confirm-btn {
+  background-color: #dc2626; /* red-600 */
+  color: white;
+  padding: 8px 16px;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+}
+
+.swal-confirm-btn:hover {
+  background-color: #b91c1c; /* red-700 */
+}
+
+.swal-cancel-btn {
+  background-color: #d1d5db; /* gray-300 */
+  color: black;
+  padding: 8px 16px;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+}
+
+.swal-cancel-btn:hover {
+  background-color: #9ca3af; /* gray-400 */
+}
+
+
+
+/* .mySwiper .product-details{
+  width: 176.164px;
+  margin-right: 10px;
+  
+} */
+ 
