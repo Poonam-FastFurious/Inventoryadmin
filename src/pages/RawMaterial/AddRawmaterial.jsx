@@ -115,8 +115,6 @@ function AddRawmaterial() {
                     >
                       <option value="">Choose Unit</option>
                       <option>Kg</option>
-                      <option>g</option>
-                      <option>Litre</option>
                     </select>
                   </div>
                 </div>

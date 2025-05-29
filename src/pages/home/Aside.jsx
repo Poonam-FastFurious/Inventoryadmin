@@ -68,22 +68,22 @@ const menuItems = [
       { title: "New Sales", link: "/add-sales" },
     ],
   },
-  {
-    title: "Purchase",
-    icon: "purchase1.svg",
-    submenu: [
-      { title: "Purchase List", link: "/purchaselist" },
-      { title: "Add Purchase", link: "/addpurchase" },
-      { title: "Import Purchase", link: "/importpurchase" },
-    ],
-  },
+  // {
+  //   title: "Purchase",
+  //   icon: "purchase1.svg",
+  //   submenu: [
+  //     { title: "Purchase List", link: "/purchaselist" },
+  //     { title: "Add Purchase", link: "/addpurchase" },
+  //     { title: "Import Purchase", link: "/importpurchase" },
+  //   ],
+  // },
   {
     title: "Expense",
     icon: "expense1.svg",
     submenu: [
       { title: "Expense List", link: "/expenselist" },
       { title: "Add Expense", link: "/createexpense" },
-      { title: "Expense Category", link: "/expensecategory" },
+     
     ],
   },
   {
@@ -94,15 +94,15 @@ const menuItems = [
       { title: "Add Quotation", link: "/addquotation" },
     ],
   },
-  {
-    title: "Transfer",
-    icon: "transfer1.svg",
-    submenu: [
-      { title: "Transfer List", link: "/transferlist" },
-      { title: "Add Transfer", link: "/addtransfer" },
-      { title: "Import Transfer", link: "/importtransfer" },
-    ],
-  },
+  // {
+  //   title: "Transfer",
+  //   icon: "transfer1.svg",
+  //   submenu: [
+  //     { title: "Transfer List", link: "/transferlist" },
+  //     { title: "Add Transfer", link: "/addtransfer" },
+  //     { title: "Import Transfer", link: "/importtransfer" },
+  //   ],
+  // },
   {
     title: "Return",
     icon: "return1.svg",

@@ -48,6 +48,14 @@ import SupplierList from "./pages/Supplier/SupplierList";
 import AddSupliyer from "./pages/Supplier/addSupliyer";
 import ProtectedRoute from "./pages/authentication/ProtectedRoute";
 import Salereports from "./pages/Reports/Salereports";
+import ExpenceList from "./pages/Expences/ExpenceList";
+import AddExpence from "./pages/Expences/AddExpence";
+import Qutation from "./pages/Qutation/Qutation";
+import AddQutation from "./pages/Qutation/AddQutation";
+import Salereturn from "./pages/Return/Salereturn";
+import Addsalesreturn from "./pages/Return/Addsalesreturn";
+import PurchageReturnelist from "./pages/Return/PurchageReturnelist";
+import Addpurchagereturn from "./pages/Return/Addpurchagereturn";
 function AppWrapper() {
   return (
     <>
@@ -93,6 +101,14 @@ function AppWrapper() {
           <Route path="/add-sales" element={<AddSales />} />
           <Route path="/sales-details/:id" element={<SaleDetails />} />
           <Route path="/salesreport" element={<Salereports />} />
+          <Route path="/expenselist" element={<ExpenceList />} />
+          <Route path="/createexpense" element={<AddExpence />} />
+          <Route path="/quotationList" element={<Qutation />} />
+          <Route path="/addquotation" element={<AddQutation />} />
+          <Route path="/salesreturnlist" element={<Salereturn />} />
+          <Route path="/createsalesreturn" element={<Addsalesreturn />} />
+          <Route path="/purchasereturnlist" element={<PurchageReturnelist />} />
+          <Route path="/createpurchasereturn" element={<Addpurchagereturn />} />
         </Route>
       </Routes>
     </>
