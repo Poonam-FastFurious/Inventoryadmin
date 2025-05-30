@@ -121,6 +121,8 @@ const menuItems = [
       { title: "Add Customer", link: "/addcustomer" },
       { title: "Supplier List", link: "/supplierlist" },
       { title: "Add Supplier", link: "/addsupplier" },
+      { title: "Store List", link: "/storelist" },
+      { title: "Add Store", link: "/addstore" },
     ],
   },
   {

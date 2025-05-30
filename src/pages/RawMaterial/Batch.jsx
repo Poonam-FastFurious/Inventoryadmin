@@ -136,7 +136,7 @@ function Batch() {
                     ) : batchdata.length > 0 ? (
                       batchdata.map((batch) => (
                         <tr key={batch._id}>
-                          <td className="p-2 border">{batch.batchCode}</td>
+                          <td className="p-2 border">{batch.batchCode}   {batch._id} </td>
                           <td className="p-2 border">
                             {batch.relatedBatch?.category}
                           </td>

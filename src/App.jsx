@@ -56,6 +56,9 @@ import Salereturn from "./pages/Return/Salereturn";
 import Addsalesreturn from "./pages/Return/Addsalesreturn";
 import PurchageReturnelist from "./pages/Return/PurchageReturnelist";
 import Addpurchagereturn from "./pages/Return/Addpurchagereturn";
+import Editmaster from "./pages/StoreSetting/Editmaster";
+import AddStore from "./pages/StoreSetting/AddStore";
+import Storelist from "./pages/StoreSetting/Storelist";
 function AppWrapper() {
   return (
     <>
@@ -109,6 +112,9 @@ function AppWrapper() {
           <Route path="/createsalesreturn" element={<Addsalesreturn />} />
           <Route path="/purchasereturnlist" element={<PurchageReturnelist />} />
           <Route path="/createpurchasereturn" element={<Addpurchagereturn />} />
+          <Route path="/editmaster/:id" element={<Editmaster />} />
+          <Route path="/AddStore" element={<AddStore />} />
+          <Route path="/storelist" element={<Storelist />} />
         </Route>
       </Routes>
     </>

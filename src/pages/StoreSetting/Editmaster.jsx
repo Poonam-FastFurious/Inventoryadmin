@@ -1,19 +1,29 @@
-import { useState } from "react";
+import React, { useState, useEffect } from "react";
 import useMasterMaterialStore from "../../Store/useSettingStore";
-import { useNavigate } from "react-router-dom";
-import { Download, Upload } from "lucide-react";
-import Papa from "papaparse";
-import toast from "react-hot-toast";
-import DownloadCsvSampleButton from "../../components/CsvBulkUploader";
-function AddMasterMaterial() {
+import { useNavigate, useParams } from "react-router-dom";
+
+function Editmaster() {
   const [name, setName] = useState("");
   const [code, setCode] = useState("");
   const [description, setDescription] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const navigate = useNavigate();
+  const { id } = useParams();
 
-  const { addMasterMaterial, addMasterMaterialsBulk } =
+  const { getMasterMaterialById, editMasterMaterial } =
     useMasterMaterialStore();
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const data = await getMasterMaterialById(id);
+      if (data) {
+        setName(data.name || "");
+        setCode(data.code || "");
+        setDescription(data.description || "");
+      }
+    };
+    fetchData();
+  }, [id, getMasterMaterialById]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -26,48 +36,13 @@ function AddMasterMaterial() {
     setIsSubmitting(true);
 
     try {
-      await addMasterMaterial({ name, code, description });
-      setName("");
-      setCode("");
-      setDescription("");
+      await editMasterMaterial(id, { name, code, description });
       navigate("/Rawmaterial");
     } catch (error) {
-      console.error("Submission failed:", error);
+      console.error("Update failed:", error);
     } finally {
       setIsSubmitting(false);
     }
-  };
- 
-  const handleFileChange = async (e) => {
-    const file = e.target.files[0];
-    if (!file) return;
-
-    Papa.parse(file, {
-      header: true,
-      skipEmptyLines: true,
-      complete: async function (results) {
-        if (results.errors.length) {
-          alert("Error parsing CSV file");
-          console.error(results.errors);
-          return;
-        }
-
-        const validRows = results.data.filter((row) => row.name && row.code);
-        if (validRows.length === 0) {
-          alert("CSV must have at least one valid row with 'name' and 'code'");
-          return;
-        }
-
-        try {
-          await addMasterMaterialsBulk(validRows);
-          // Navigate after success
-          navigate("/Rawmaterial");
-        } catch (err) {
-          // Optional: handle error here if not handled inside store
-          toast.error("Bulk upload failed", err);
-        }
-      },
-    });
   };
 
   return (
@@ -75,21 +50,8 @@ function AddMasterMaterial() {
       <div className="content">
         <div className="page-header">
           <div className="page-title">
-            <h4>Add Master Material</h4>
-            <h6>Create a new master material</h6>
-          </div>
-          <div className="flex gap-3">
-            <DownloadCsvSampleButton />
-            <label className="btn bg-blue-100 text-blue-700 flex items-center cursor-pointer">
-              <Upload className="w-5 h-5 mr-2" />
-              Bulk Upload
-              <input
-                type="file"
-                accept=".csv"
-                className="hidden"
-                onChange={handleFileChange}
-              />
-            </label>
+            <h4>Edit Master Material</h4>
+            <h6>Update master material details</h6>
           </div>
         </div>
 
@@ -130,20 +92,18 @@ function AddMasterMaterial() {
                 </div>
               </div>
 
-              <div className="flex gap-4 items-center sm:col-span-2">
+              <div>
                 <button
                   type="submit"
-                  className="btn btn-submit"
+                  className="btn btn-submit mr-2"
                   onClick={handleSubmit}
                   disabled={isSubmitting}
                 >
-                  {isSubmitting ? "Submitting..." : "Submit"}
+                  {isSubmitting ? "Updating..." : "Update"}
                 </button>
-                <a href="/master-material-list" className="btn btn-cancel">
+                <a href="/Rawmaterial" className="btn btn-cancel">
                   Cancel
                 </a>
-
-                {/* Bulk Upload Button */}
               </div>
             </div>
           </div>
@@ -153,4 +113,4 @@ function AddMasterMaterial() {
   );
 }
 
-export default AddMasterMaterial;
+export default Editmaster;
