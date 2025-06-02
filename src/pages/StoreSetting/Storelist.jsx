@@ -10,7 +10,7 @@ function Storelist() {
     if (stores.length === 0) {
       fetchStores();
     }
-  }, []);
+  });
   const handleToggle = (storeId) => {
     toggleStoreStatus(storeId);
   };
@@ -52,12 +52,7 @@ function Storelist() {
                       class="dataTables_filter"
                     >
                       <label>
-                        <input
-                          type="search"
-                          class=""
-                          placeholder="Search..."
-                          aria-controls="DataTables_Table_0"
-                        />
+                        <input type="search" class="" placeholder="Search..." />
                       </label>
                     </div>
                   </div>
@@ -69,12 +64,7 @@ function Storelist() {
                   id="DataTables_Table_0_wrapper"
                   class="dataTables_wrapper no-footer"
                 >
-                  <table
-                    class="table datanew dataTable no-footer"
-                    id="DataTables_Table_0"
-                    role="grid"
-                    aria-describedby="DataTables_Table_0_info"
-                  >
+                  <table class="table datanew dataTable no-footer">
                     <thead>
                       <tr role="row">
                         <th style={{ width: "38.4875px" }}>
@@ -144,9 +134,9 @@ function Storelist() {
                                   alt="Edit"
                                 />
                               </Link>
-                              <a
+                              <Link
                                 className="mr-3 confirm-text"
-                                href="#"
+                                to="#"
                                 onClick={() => {
                                   deleteStore(store._id);
                                 }}
@@ -155,7 +145,7 @@ function Storelist() {
                                   src="https://dreamspos.dreamstechnologies.com/tailwind/template/assets/img/icons/delete.svg"
                                   alt="Delete"
                                 />
-                              </a>
+                              </Link>
                             </td>
                           </tr>
                         ))

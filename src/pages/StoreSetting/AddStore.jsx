@@ -1,8 +1,11 @@
 import React, { useState } from "react";
 import useMasterMaterialStore from "../../Store/useSettingStore";
+import { useNavigate } from "react-router-dom";
 
 function AddStore() {
   const addStore = useMasterMaterialStore((state) => state.addStore);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const navigate = useNavigate();
 
   // Local state for form fields
   const [storeName, setStoreName] = useState("");
@@ -32,6 +35,9 @@ function AddStore() {
       alert("Store image is required");
       return;
     }
+
+    setIsSubmitting(true); // 🔒 Disable the button
+
     const formData = new FormData();
     formData.append("storeName", storeName);
     formData.append("userName", userName);
@@ -39,15 +45,14 @@ function AddStore() {
     formData.append("phone", phone);
     formData.append("email", email);
     formData.append("image", storeImage);
-    await addStore(formData);
-    setStoreName("");
-    setUserName("");
-    setPassword("");
-    setPhone("");
-    setEmail("");
-    setStoreImage(null);
-    setPreviewImage(null); // Clear preview
-    e.target.reset?.();
+
+    try {
+      await addStore(formData);
+      navigate("/storelist"); // ✅ Navigate after success
+    } catch (error) {
+      alert("Failed to add store.", error);
+      setIsSubmitting(false); // 🔓 Re-enable if error
+    }
   };
 
   return (
@@ -168,9 +173,14 @@ function AddStore() {
                 </div>
               )}
               <div className="sm:col-span-2 lg:col-span-4 flex gap-2">
-                <button type="submit" className="btn btn-submit">
-                  Submit
+                <button
+                  type="submit"
+                  className="btn btn-submit"
+                  disabled={isSubmitting}
+                >
+                  {isSubmitting ? "Submitting..." : "Submit"}
                 </button>
+
                 <a href="/storelist" className="btn btn-cancel">
                   Cancel
                 </a>

@@ -7,6 +7,7 @@ import { toast } from "react-hot-toast"; // Import toast
 const useMasterMaterialStore = create((set) => ({
   masterMaterials: [],
   stores: [],
+  selectedStore: null,
   totalCount: 0,
   loading: false,
   error: null,
@@ -216,6 +217,70 @@ const useMasterMaterialStore = create((set) => ({
         error.response?.data?.message || "Failed to delete store";
       set({ error: errorMessage });
       toast.error(errorMessage);
+    }
+  },
+  getStoreById: async (id) => {
+    set({ loading: true, error: null });
+    try {
+      const res = await axios.get(`${Baseurl}store/single/${id}`);
+      set({ selectedStore: res.data.data, loading: false });
+      return res.data.data;
+    } catch (error) {
+      console.error("❌ getStoreById error:", error);
+      const errMsg =
+        error.response?.data?.message || "Failed to fetch store data";
+      set({ loading: false, error: errMsg });
+      toast.error(errMsg);
+      return null;
+    }
+  },
+  updateStore: async (id, formData) => {
+    set({ loading: true, error: null });
+    try {
+      const response = await axios.patch(
+        `${Baseurl}store/edit/${id}`,
+        formData
+      );
+      set((state) => ({
+        stores: state.stores.map((store) =>
+          store._id === id ? response.data.data : store
+        ),
+        selectedStore: response.data.data,
+        loading: false,
+      }));
+      toast.success("Store updated successfully");
+    } catch (error) {
+      const errorMessage =
+        error.response?.data?.message || "Failed to update store";
+      set({ error: errorMessage, loading: false });
+      toast.error(errorMessage);
+    }
+  },
+  assignMaterialsToStore: async (storeId, materialIds) => {
+    set({ loading: true, error: null });
+    try {
+      const res = await axios.post(`${Baseurl}store/assign-master-materials`, {
+        storeId,
+        masterMaterialIds: materialIds,
+      });
+
+      set((state) => ({
+        stores: state.stores.map((store) =>
+          store._id === storeId ? res.data.data : store
+        ),
+      }));
+
+      toast.success("Materials assigned successfully");
+      set({ loading: false });
+
+      return res.data;
+    } catch (error) {
+      const errorMessage =
+        error.response?.data?.message || "Failed to assign materials";
+      console.error("Error assigning materials:", errorMessage);
+      set({ error: errorMessage, loading: false });
+      toast.error(errorMessage);
+      return null;
     }
   },
 }));

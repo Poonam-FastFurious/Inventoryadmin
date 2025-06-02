@@ -59,6 +59,9 @@ import Addpurchagereturn from "./pages/Return/Addpurchagereturn";
 import Editmaster from "./pages/StoreSetting/Editmaster";
 import AddStore from "./pages/StoreSetting/AddStore";
 import Storelist from "./pages/StoreSetting/Storelist";
+import EditStore from "./pages/StoreSetting/EditStore";
+import AssignMaterialsToStore from "./pages/StoreSetting/Assignematerial";
+import Assigne from "./pages/StoreSetting/Assigne";
 function AppWrapper() {
   return (
     <>
@@ -115,6 +118,8 @@ function AppWrapper() {
           <Route path="/editmaster/:id" element={<Editmaster />} />
           <Route path="/AddStore" element={<AddStore />} />
           <Route path="/storelist" element={<Storelist />} />
+          <Route path="/editstore/:id" element={<EditStore />} />
+          <Route path="/asigne" element={<Assigne />} />
         </Route>
       </Routes>
     </>
